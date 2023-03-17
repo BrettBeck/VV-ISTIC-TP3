@@ -7,9 +7,23 @@ For example: `{[][]}({})` is balanced, while `][`, `([)]`, `{`, `{(}{}` are not.
 Implement the following method:
 
 ```java
-public static boolean isBalanced(String str) {
-    ...
-}
+ public static boolean isBalanced(String str) {
+        int parentheses = 0;
+        int brackets = 0;
+        int squareBrackets = 0;
+
+        for(int i; i < str.length(); i++) {
+        switch (str.charAt(i)) {
+        case '{': brackets++; break;
+        case '}': brackets--; break;
+        case '[': squareBrackets++; break;
+        case ']': squareBrackets--; break;
+        case '(': parentheses++; break;
+        case ')': parentheses--; break;
+        }
+        }
+        return (parentheses == brackets && brackets == squareBrackets && brackets == 0);
+        }
 ```
 
 `isBalanced` returns `true` if `str` is balanced according to the rules explained above. Otherwise, it returns `false`.
@@ -26,3 +40,49 @@ Use the project in [tp3-balanced-strings](../code/tp3-balanced-strings) to compl
 
 ## Answer
 
+1.
+correct input:
+- ()
+- {}
+- []
+- ([])
+- [()]
+- {[]}
+- (())
+- (a)
+- {a}
+- [a]
+- (a[]a)
+- [(a)]
+- a{a[a]a}a
+- a(())a
+
+incorrect input:
+- (
+- )
+- {
+- }
+- ([)
+- {{
+- (){
+- ))
+- ()()()(a
+- (a
+- a}a
+- ([a)
+- {{a
+- (){
+- ))
+- ()(a)()(a
+
+limit input:
+- null
+- 8
+- ""
+- '
+- ~
+- \(a)
+
+2. the statement coverage is 100%
+
+3.

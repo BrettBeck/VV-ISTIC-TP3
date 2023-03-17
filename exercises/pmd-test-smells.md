@@ -15,3 +15,6 @@ Include the improved test code in this file.
 
 ## Answer
 
+With the rule JunitTestContainsTooManyAsserts their is a bad smell detected here : /Apache_maths/commons-math/commons-math-legacy-core/src/test/java/org/apache/commons/math4/legacy/core/jdkmath/AccurateMathTest.java:1252:.
+  
+The test should have been divided into many tests to have better readability in case of errors.

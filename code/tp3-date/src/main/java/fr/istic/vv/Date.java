@@ -1,17 +1,46 @@
 package fr.istic.vv;
 
-class Date implements Comparable<Date> {
+import java.time.LocalDate;
 
-    public Date(int day, int month, int year) { }
+public class Date implements Comparable<Date> {
+    private int day;
+    private int month;
+    private int year;
 
-    public static boolean isValidDate(int day, int month, int year) { return false; }
+    public Date(int day, int month, int year) {
+        if (!isValidDate(day, month, year)) {
+            throw new IllegalArgumentException("Date invalide " + day + " " + month + " "  + year );
+        }
+        this.day = day;
+        this.month = month;
+        this.year = year;
+    }
 
-    public static boolean isLeapYear(int year) { return false; }
+    public static boolean isValidDate(int day, int month, int year) {
+        try {
+            LocalDate.of(year, month, day);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
-    public Date nextDate() { return null; }
+    public static boolean isLeapYear(int year) {
+        return LocalDate.ofYearDay(year, 1).isLeapYear();
+    }
 
-    public Date previousDate() { return null; }
+    public Date nextDate() {
+        LocalDate date = LocalDate.of(year, month, day).plusDays(1);
+        return new Date(date.getDayOfMonth(), date.getMonthValue(), date.getYear());
+    }
 
-    public int compareTo(Date other) { return 0; }
+    public Date previousDate() {
+        LocalDate date = LocalDate.of(year, month, day).minusDays(1);
+        return new Date(date.getDayOfMonth(), date.getMonthValue(), date.getYear());
+    }
 
+    public int compareTo(Date other) {
+        java.util.Date date = new java.util.Date(year, month, day);
+        return date.compareTo(new java.util.Date(other.year, other.month, other.day));
+    }
 }

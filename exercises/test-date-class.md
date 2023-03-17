@@ -53,3 +53,4 @@ Use the project in [tp3-date](../code/tp3-date) to complete this exercise.
 
 ## Answer
 
+2. 94% of the lines are tested, i should create an assertThrows test with the creation of an invalid date
